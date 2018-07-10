@@ -3,8 +3,13 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import services from './service'
 
-Vue.config.productionTip = false
+Object.defineProperty(Vue.prototype,'$services',{value:services});
+
+Vue.config.errorHandler = (err, vm, info) => {
+  console.error(err);
+};
 
 /* eslint-disable no-new */
 new Vue({
