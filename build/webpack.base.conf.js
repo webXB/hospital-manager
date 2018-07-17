@@ -21,6 +21,7 @@ const base = {
       'vue$': 'vue/dist/vue.esm.js',
       '@': utils.resolve('src'),
       '@views': utils.resolve('src/modules/views'),
+      '@assets': utils.resolve('src/assets'),
 
       'services':utils.resolve('src/modules/services'),
       'utils':utils.resolve('node_modules/cloud-utils/dist/cloud-utils.esm')

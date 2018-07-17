@@ -8,7 +8,7 @@ module.exports = {
   dev: {
 
     // Paths
-    assetsSubDirectory: 'static',
+    assetsSubDirectory: 'assets',
     assetsPublicPath: '/',
     proxyTable: {},
 
@@ -33,7 +33,7 @@ module.exports = {
      */
 
     // https://webpack.js.org/configuration/devtool/#development
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'eval-source-map',
 
     // If you have problems debugging vue-files in devtools,
     // set this to false - it *may* help
@@ -49,7 +49,7 @@ module.exports = {
 
     // Paths
     assetsRoot: path.resolve(__dirname, '../../','dist'),
-    assetsSubDirectory: 'static',
+    assetsSubDirectory: 'assets',
     assetsPublicPath: '/',
 
     /**
@@ -83,6 +83,7 @@ module.exports = {
     root: path.resolve(__dirname, '../../'),
     dll:path.resolve(__dirname,'../../src/assets','dll'),
     src: path.resolve(__dirname, '../../', 'src'),
-    modules: path.resolve(__dirname, '../../src', 'modules')
+    modules: path.resolve(__dirname, '../../src', 'modules'),
+    nodeModules: path.resolve(__dirname, '../../', 'node_modules'),
   }
 }
