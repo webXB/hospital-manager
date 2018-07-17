@@ -18,7 +18,7 @@ axios.interceptors.response.use((response)=>{
   const TITLE = '提示';
   const WITHOUTTOKEN = '登录已超时，请重新登陆';
   if(res && res.code === 2000){
-    $alert(title,WITHOUTTOKEN,{
+    MessageBox.confirm(WITHOUTTOKEN,TITLE,{
       confirmButtonText:'确定',
       callback:()=>{
         removeToken();

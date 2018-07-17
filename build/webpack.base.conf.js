@@ -1,41 +1,29 @@
-'use strict'
-const path = require('path')
-const utils = require('./utils')
-const config = require('../config')
-const vueLoaderConfig = require('./vue-loader.conf')
+'use strict';
+const path = require('path');
+const utils = require('./utils');
+const config = require('./config');
+const os = require('os');
+const HappyPack = require('happypack');
+const happyThreadPool = HappyPack.ThreadPool({size:os.cpus().length});
+const vueLoaderConfig = require('./vue-loader.conf');
 
-function resolve (dir) {
-  return path.join(__dirname, '..', dir)
-}
-
-const createLintingRule = () => ({
-  test: /\.(js|vue)$/,
-  loader: 'eslint-loader',
-  enforce: 'pre',
-  include: [resolve('src'), resolve('test')],
-  options: {
-    formatter: require('eslint-friendly-formatter'),
-    emitWarning: !config.dev.showEslintErrorsInOverlay
-  }
-})
-
-module.exports = {
+const base = {
   context: path.resolve(__dirname, '../'),
-  entry: {
-    app: './src/main.js'
-  },
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
-    publicPath: process.env.NODE_ENV === 'production'
-      ? config.build.assetsPublicPath
-      : config.dev.assetsPublicPath
+    libraryTarget:'umd',
+    umdNamedDefine: true
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
-      '@': resolve('src'),
+      '@': utils.resolve('src'),
+      '@views': utils.resolve('src/modules/views'),
+
+      'services':utils.resolve('src/modules/services'),
+      'utils':utils.resolve('node_modules/cloud-utils/dist/cloud-utils.esm')
     }
   },
   module: {
@@ -48,15 +36,21 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        loader: 'babel-loader',
-        include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
+        use:['happypack/loader?id=happybabel'],
+        include:[utils.resolve('src/modules')]
+       },
+      {
+        test: /\.html$/,
+        use: 'happypack/loader?id=happyhtml',
+        include: config.directory.src,
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
+        include:[utils.resolve('src')],
         options: {
           limit: 10000,
-          name: utils.assetsPath('img/[name].[hash:7].[ext]')
+          name: utils.assetsPath('[name].[hash:7].[ext]')
         }
       },
       {
@@ -77,6 +71,23 @@ module.exports = {
       }
     ]
   },
+  plugins: [
+    new HappyPack({
+      id:'happybabel',
+      loaders:['babel-loader'],
+      threadPool:happyThreadPool,
+      cache:true,
+      verbose:true
+    }),
+
+    new HappyPack({
+      id:'happyhtml',
+      loaders:['raw-loader'],
+      threadPool:happyThreadPool,
+      cache:true,
+      verbose:true
+    })
+  ],
   node: {
     // prevent webpack from injecting useless setImmediate polyfill because Vue
     // source contains it (although only uses it if it's native).
@@ -89,4 +100,12 @@ module.exports = {
     tls: 'empty',
     child_process: 'empty'
   }
+};
+
+if (process.env.NODE_ENV !== 'dll') {
+  base.entry = {
+    app: config.directory.modules + '/main.js'
+  }
 }
+
+module.exports = base;

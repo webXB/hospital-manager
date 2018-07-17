@@ -1,11 +1,10 @@
 'use strict'
 const utils = require('./utils')
 const webpack = require('webpack')
-const config = require('../config')
+const config = require('./config')
 const merge = require('webpack-merge')
 const path = require('path')
 const baseWebpackConfig = require('./webpack.base.conf')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
@@ -29,7 +28,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       ],
     },
     hot: true,
-    contentBase: false, // since we use CopyWebpackPlugin.
+    contentBase: [config.directory.src,path.join(config.directory.src,'modules')], // since we use CopyWebpackPlugin.
     compress: true,
     host: HOST || config.dev.host,
     port: PORT || config.dev.port,
@@ -46,7 +45,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env': require('../config/dev.env')
+      'process.env': require('./config/dev.env')
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
@@ -54,17 +53,14 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: 'index.html',
+      template: path.join(config.directory.root,'src/index.html'),
       inject: true
     }),
-    // copy custom static assets
-    new CopyWebpackPlugin([
-      {
-        from: path.resolve(__dirname, '../static'),
-        to: config.dev.assetsSubDirectory,
-        ignore: ['.*']
-      }
-    ])
+    new webpack.DllReferencePlugin({
+      context:config.directory.root,
+      manifest:require(config.directory.root + '/vendor-manifest.json')
+    }),
+    new FriendlyErrorsPlugin()
   ]
 })
 

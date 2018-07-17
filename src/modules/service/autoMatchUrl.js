@@ -6,7 +6,7 @@ export default function autoMatchUrl(prefix){
   let baseUrl = '';
   switch (prefix){
     default:
-      baseUrl =  'http://qupap.xin:3390/mms-web/';
+      baseUrl = window.LOCAL_CONFIG.API_HOME;
   }
   return `${baseUrl}${prefix}`;
 }
