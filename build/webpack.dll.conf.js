@@ -11,7 +11,8 @@ const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const vendors = [
   'axios',
   'vue',
-  'vue-router'
+  'vue-router',
+  'normalize.css'
 ]
 
 const webpackConfig = merge(baseWebpackConfig,{

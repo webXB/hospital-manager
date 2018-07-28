@@ -8,9 +8,16 @@
     <meta http-equiv="Expires" content="0" />
     <script src="config.js"></script>
     <title>PC管理端</title>
+    <link rel="stylesheet" href="assets/dll/vendor.dll.css">
   </head>
   <body>
     <div id="app"></div>
     <script src="assets/dll/vendor.dll.js"></script>
+    <script>
+      window.onload = ()=>{
+          const H = document.documentElement.scrollHeight > document.documentElement.clientHeight ? document.documentElement.scrollHeight  : document.documentElement.clientHeight;
+          document.body.style.height = `${H}px`;
+      };
+    </script>
   </body>
 </html>

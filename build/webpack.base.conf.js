@@ -22,9 +22,11 @@ const base = {
       '@': utils.resolve('src'),
       '@views': utils.resolve('src/modules/views'),
       '@assets': utils.resolve('src/assets'),
+      '@less': utils.resolve('src/assets/less'),
 
       'services':utils.resolve('src/modules/services'),
-      'utils':utils.resolve('node_modules/cloud-utils/dist/cloud-utils.esm')
+      'utils':utils.resolve('node_modules/cloud-utils/dist/cloud-utils.esm'),
+      'global':utils.resolve('src/assets/less/global.less')
     }
   },
   module: {

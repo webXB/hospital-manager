@@ -13,6 +13,16 @@ const routes = [
       require(['@views/login'],resolve);
     }
   },
+  {
+    path:'/',
+    name:'main',
+    meta:{
+      title:'首页',
+    },
+    component(resolve){
+      require(['@views/main'],resolve);
+    }
+  },
   // {
   //   path: '*', redirect: '/login'
   // }

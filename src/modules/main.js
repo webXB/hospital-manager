@@ -5,6 +5,7 @@ import App from './App'
 import services from './service/index'
 import router from './router';
 import './router/routeInterceptor';
+import md5 from 'js-md5';
 
 
 Object.defineProperty(Vue.prototype,'$services',{value:services});
