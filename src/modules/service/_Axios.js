@@ -12,24 +12,24 @@ axios.interceptors.request.use((config)=>{
 });
 
 //返回拦截器（于transformResponse之后处理）
-// 返回的数据类型默认是json，若是其他类型就会出现问题，用try,catch捕获异常
-// axios.interceptors.response.use((response)=>{
-//   const res = response && response.data;
-//   const TITLE = '提示';
-//   const WITHOUTTOKEN = '登录已超时，请重新登陆';
-//   if(res && res.code === 2000){
-//     MessageBox.confirm(WITHOUTTOKEN,TITLE,{
-//       confirmButtonText:'确定',
-//       callback:()=>{
-//         removeToken();
-//         window.location.reload();
-//       }
-//     })
-//   }
-//   return response;
-// },(error)=>{
-//   return Promise.reject(error)
-// });
+//返回的数据类型默认是json，若是其他类型就会出现问题，用try,catch捕获异常
+axios.interceptors.response.use((response)=>{
+  const res = response && response.data;
+  const TITLE = '提示';
+  const WITHOUTTOKEN = '登录已超时，请重新登陆';
+  if(res && res.code === 2000){
+    MessageBox.confirm(WITHOUTTOKEN,TITLE,{
+      confirmButtonText:'确定',
+      callback:()=>{
+        removeToken();
+        window.location.reload();
+      }
+    })
+  }
+  return response;
+},(error)=>{
+  return Promise.reject(error)
+});
 
 function checkStatus(response) {
   if (response) {
