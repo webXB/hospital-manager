@@ -1,7 +1,7 @@
 @import "~global";
 
 .table-container{
-  width: 1001px;
+  width: 1198px;
   margin: 30px auto 0;
   .el-table{
     font-size: 12px;
@@ -15,11 +15,17 @@
     height: 0;
     clear: both;
 
-    .fl{
-      float: left;
-    }
-    .fr{
-      float: right;
+
+  }
+  .fl{
+    float: left;
+    width: 50%;
+  }
+  .fr{
+    float: right;
+    .el-button{
+      margin-top: 7px;
+
     }
   }
   .title-container{
@@ -42,6 +48,65 @@
       float: right;
     }
   }
+  .el-dialog{
+   .input-container {
+      overflow: hidden;
+      margin-bottom: 20px;
 
+      .el-input, label, .el-textarea {
+        float: left;
+      }
+      .input-label {
+        height: 40px;
+        line-height: 40px;
+        width: 85px;
+        text-align: right;
+      }
+     label{
+       width: 85px;
+       text-align: right;
+     }
+      .el-input, .el-textarea {
+        width: 85%;
+      }
+    }
+  }
+  .el-button--primary{
+    color: #fff;
+  }
+
+  .search-container{
+    height: 50px;
+    background-color: rgb(243,243,243);
+    padding: 0 22px;
+
+    .fl{
+      height: 100%;
+      line-height: 50px;
+      font-size: 12px;
+    }
+    .fr a{
+      font-size: 12px;
+      text-decoration: none;
+      color: #aaa;
+      padding-right: 20px;
+    }
+  }
+
+  .search-item{
+    background-color: #fff;
+    margin-bottom: 20px;
+    padding: 5px 20px;
+    font-size: 12px;
+
+    .input-container{
+      width: 300px;
+      float: left;
+      margin-right: 20px;
+      .el-input{
+          width: 70%;
+      }
+    }
+  }
 }
 

@@ -17,7 +17,7 @@
         <template slot-scope="scope">
           <el-button type="text" size="small">权限操作</el-button>
           <el-button type="text" size="small" @click="showUpdateDialog(scope.row)">编辑</el-button>
-          <el-button type="text" size="small">删除</el-button>
+          <el-button type="text" size="small" @click="deleteDepartment(scope.row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -121,6 +121,9 @@
         this.buttonType = 'update';
         this.dialogVisiable = true;
       },
+      showDialog(){
+        this.dialogVisiable = true;
+      },
       hideDialog(){
         this.dialogVisiable = false;
       },
@@ -201,6 +204,40 @@
           }
         }catch(err){
           console.log(err);
+        }
+      },
+      async deleteDepartment(data){
+        try{
+          let res = await this.$services.deleteDepartment({
+            data:{
+              idArrStr:data.id
+            }
+          });
+          if(res.code === 1){
+            MessageBox.confirm('删除成功', '提示', {
+              confirmButtonText: '确定',
+              callback:()=>{
+                let data = {
+                  currentPage:1,
+                  pageSize:this.pageSize
+                };
+                this.getDepartmentListPage(data);
+              }
+            });
+          }else{
+            MessageBox.confirm('删除失败', '提示', {
+              confirmButtonText: '确定',
+              callback:()=>{
+                let data = {
+                  currentPage:1,
+                  pageSize:this.pageSize
+                };
+                this.getDepartmentListPage(data);
+              }
+            });
+          }
+        }catch(err){
+          console.error(err);
         }
       }
     }
