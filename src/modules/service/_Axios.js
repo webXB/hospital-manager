@@ -90,7 +90,7 @@ export default function _Axios(url,{
 
   headers = Object.assign(method === 'get'?{
     'Accept': 'application/json',
-    'Content-Type': 'application/json; charset=UTF-8'
+    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
   } : {
     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
   }, headers);
@@ -106,7 +106,7 @@ export default function _Axios(url,{
     responseType: dataType
   };
   if(method === 'get'){
-    delete defaultConfig.data;
+    //delete defaultConfig.data;
   }else{
     delete defaultConfig.params;
   }
