@@ -15,11 +15,17 @@
     height: 0;
     clear: both;
 
-    .fl{
-      float: left;
-    }
-    .fr{
-      float: right;
+
+  }
+  .fl{
+    float: left;
+    width: 50%;
+  }
+  .fr{
+    float: right;
+    .el-button{
+      margin-top: 7px;
+
     }
   }
   .title-container{
@@ -42,6 +48,25 @@
       float: right;
     }
   }
+  .el-dialog{
+   .input-container {
+      overflow: hidden;
+      margin-bottom: 20px;
 
+      .el-input, label, .el-textarea {
+        float: left;
+      }
+      .input-label {
+        height: 40px;
+        line-height: 40px;
+      }
+      .el-input, .el-textarea {
+        width: 85%;
+      }
+    }
+  }
+  .el-button--primary{
+    color: #fff;
+  }
 }
 

@@ -29,7 +29,7 @@
       },
       methods:{
         async getAllMenuList(){
-          let res = await this.$services.getAllMenuList({
+          let res = await this.$services.getCurrentUserMenuList({
             method:'get'
           });
 

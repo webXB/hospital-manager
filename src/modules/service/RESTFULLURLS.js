@@ -1,5 +1,7 @@
 export default {
   'login':'ajaxLogin',
-  'getAllMenuList':'/pri/menu/get_all_menu_list',
-  'departmentListPage':'/pri/department/list_page'
+  'getCurrentUserMenuList':'/pri/menu/get_current_user_menu_list',
+  'departmentListPage':'/pri/department/list_page',
+  'addDepartment':'/pri/department/add',
+  'updateDepartment':'/pri/department/update'
 }
