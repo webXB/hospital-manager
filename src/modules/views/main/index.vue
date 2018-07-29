@@ -3,12 +3,12 @@
     <el-header style="background-color: #1ABC9C;height: 50px;">
       <HeaderNav></HeaderNav>
     </el-header>
-    <el-container style="height: 100%">
-      <LeftNav></LeftNav>
-      <el-main>
+    <el-main>
+      <LeftNav :menuList="allMenuList" @mainJump= "mainJump" :url="url"></LeftNav>
+      <div class="page-main">
         <router-view></router-view>
+      </div>
       </el-main>
-    </el-container>
   </el-container>
 </template>
 
@@ -22,7 +22,18 @@
     export default {
       data(){
         return{
-          allMenuList:[],
+          allMenuList:[
+            {
+              menu_name: "权限",
+              child:[{
+                menu_name: "部门管理",
+                url:'/sectionManage'
+              },{
+                menu_name:'员工管理'
+              }],
+              menu_classify:'权限管理'
+            }
+          ],
         }
       },
       created(){
@@ -30,23 +41,27 @@
       },
       methods:{
         async getAllMenuList(){
-          let res = await this.$services.getAllMenuList();
+          let res = await this.$services.getAllMenuList({
+            method:'get'
+          });
 
           if(res.code === 1){
             this.allMenuList = res.data;
             console.log(this.allMenuList);
           }
+        },
+        mainJump(url){
+           this.$router.push(url);
         }
       },
       components: {
         ElHeader,
-        ElAside,
         ElMain,
         ElContainer,HeaderNav,LeftNav}
 
     }
 </script>
 
-<style scoped>
-
+<style scoped lang="less" rel="stylesheet/less">
+  @import './style.less';
 </style>

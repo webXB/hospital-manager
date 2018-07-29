@@ -111,6 +111,10 @@ export default function _Axios(url,{
     delete defaultConfig.params;
   }
 
+  if (getToken() && getToken() !== 'undefined') {
+    defaultConfig.data['sid'] = getToken();
+  }
+
   const contentType = headers['Content-Type'];
 
   if (typeof contentType !== 'undefined') {

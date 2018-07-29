@@ -1,0 +1,62 @@
+.left-nav {
+  color: #ccc;
+  height: 100%;
+  background-color: rgb(70, 76, 91);
+  width: 70px;
+  ul.menuList {
+    padding: 0;
+    margin: 0;
+    position: relative;
+
+    li.menuListItem {
+      list-style: none;
+      text-align: center;
+      border-bottom: 1px solid #20a0ff;
+      padding: 10px;
+      cursor: pointer;
+
+      ul.menuListDetail {
+        padding-left: 0;
+        color: #666666;
+        font-size: 12px;
+        width: 150px;
+        position: absolute;
+        top: 0;
+        right: -150px;
+        background-color: #EAEDF1;
+
+        .currentMenu{
+          list-style: none;
+          text-align: left;
+          text-indent: 20px;
+          height: 30px;
+          line-height: 30px;
+          padding: 10px;
+          cursor: pointer;
+          border:1px solid rgb(228,228,228);
+          font-size: 14px;
+          color: #999;
+          background-color: rgb(242, 242, 242);
+        }
+
+        .menuListDetailItem {
+          list-style: none;
+          text-align: left;
+          text-indent: 20px;
+          height: 20px;
+          line-height: 20px;
+          padding: 10px;
+          cursor: pointer;
+          border:1px solid rgb(228,228,228);
+
+        }
+        .menuListDetailItem:hover {
+          color: rgba(26, 188, 156, 0.8);
+        }
+      }
+    }
+  }
+}
+//.iconfont{
+//  font-size:24px;
+//}

@@ -21,7 +21,17 @@ const routes = [
     },
     component(resolve){
       require(['@views/main'],resolve);
-    }
+    },
+    children:[{
+      path:'/sectionManage',
+      name:'sectionManage',
+      meta:{
+        title:'部门管理'
+      },
+      component(resolve){
+        require(['@views/sectionManage'],resolve);
+      }
+    }]
   },
   // {
   //   path: '*', redirect: '/login'
