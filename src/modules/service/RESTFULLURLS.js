@@ -1,4 +1,5 @@
 export default {
   'login':'ajaxLogin',
-  'getAllMenuList':'/pri/menu/get_all_menu_list'
+  'getAllMenuList':'/pri/menu/get_all_menu_list',
+  'departmentListPage':'/pri/department/list_page'
 }

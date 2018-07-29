@@ -3,9 +3,9 @@
     <ul class = "menuList">
       <li class="menuListItem" v-for="(item,index) in menuList" @mouseover = "showFocusDetail(item)" @mouseleave = "hideFocusDetail()">
         <span>{{item.menu_name}}</span>
-        <ul class="menuListDetail"  v-if="showDetail" :style = "{height : listHeight + 'px'}">
-          <li class="currentMenu">{{currentMenu}}</li>
-          <li class="menuListDetailItem" v-for="item in menuFocusList" @click = "jumpOtherPage(item.url)">• {{item.menu_name}}</li>
+        <ul class="menuListDetail" v-for="item in menuFocusList"  v-if="showDetail">
+          <li class="currentMenu">{{item.menu_name}}</li>
+          <li class="menuListDetailItem" @click = "jumpOtherPage(items.menu_url)" v-for="items in item.child">• {{items.menu_name}}</li>
         </ul>
       </li>
     </ul>
@@ -13,15 +13,12 @@
 </template>
 
 <script>
-    import ElAside from "element-ui/packages/aside/src/main";
-    const H = document.documentElement.scrollHeight > document.documentElement.clientHeight ? document.documentElement.scrollHeight  : document.documentElement.clientHeight - 50;
     export default {
       data(){
         return{
           showDetail:false,
           menuFocusList:[],
-          currentMenu:'',
-          listHeight:H
+          currentMenu:''
         }
       },
       methods:{
@@ -38,7 +35,6 @@
           this.$emit('mainJump',url);
         }
       },
-      components: {ElAside},
       props:{
         menuList:{
           type:Array

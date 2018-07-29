@@ -17,23 +17,11 @@
     import 'element-ui/lib/theme-chalk/index.css'
     import {HeaderNav,LeftNav} from '@/modules/components'
     import ElMain from "element-ui/packages/main/src/main";
-    import ElAside from "element-ui/packages/aside/src/main";
     import ElHeader from "element-ui/packages/header/src/main";
     export default {
       data(){
         return{
-          allMenuList:[
-            {
-              menu_name: "权限",
-              child:[{
-                menu_name: "部门管理",
-                url:'/sectionManage'
-              },{
-                menu_name:'员工管理'
-              }],
-              menu_classify:'权限管理'
-            }
-          ],
+          allMenuList:[],
         }
       },
       created(){
@@ -47,7 +35,6 @@
 
           if(res.code === 1){
             this.allMenuList = res.data;
-            console.log(this.allMenuList);
           }
         },
         mainJump(url){
