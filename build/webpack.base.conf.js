@@ -40,7 +40,7 @@ const base = {
       {
         test: /\.js$/,
         use:['happypack/loader?id=happybabel'],
-        include:[utils.resolve('src/modules')]
+        include:[utils.resolve('src/modules'),utils.resolve('node_modules/element-ui/src'),utils.resolve('node_modules/element-ui/packages')]
        },
       {
         test: /\.html$/,
